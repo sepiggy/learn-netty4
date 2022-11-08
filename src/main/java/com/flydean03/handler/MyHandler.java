@@ -32,8 +32,8 @@ public class MyHandler extends SimpleChannelInboundHandler<Object> {
         // 对消息进行处理
         ByteBuf in = (ByteBuf) msg;
         try {
-            log.info("收到消息:{}",in.toString(io.netty.util.CharsetUtil.US_ASCII));
-        }finally {
+            log.info("收到消息:{}", in.toString(io.netty.util.CharsetUtil.US_ASCII));
+        } finally {
             ReferenceCountUtil.release(msg);
         }
     }

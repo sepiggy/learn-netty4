@@ -56,7 +56,7 @@ public class FirstServer {
             // 等待server socket关闭
             f.channel().closeFuture().sync();
         } finally {
-            //关闭group
+            // 关闭group
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
