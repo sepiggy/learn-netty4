@@ -16,7 +16,8 @@
 package com.flydean01.first;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.*;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.charset.StandardCharsets;
@@ -41,7 +42,7 @@ public class FirstClientHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // 异常处理
-        log.error("出现异常",cause);
+        log.error("出现异常", cause);
         ctx.close();
     }
 

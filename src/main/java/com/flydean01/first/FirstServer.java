@@ -35,7 +35,7 @@ public class FirstServer {
     private final int port;
 
     public void start() throws InterruptedException {
-        //建立两个EventloopGroup用来处理连接和消息
+        // 建立两个EventloopGroup用来处理连接和消息
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -63,7 +63,7 @@ public class FirstServer {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int port=8000;
+        int port = 8000;
         new FirstServer(port).start();
     }
 
