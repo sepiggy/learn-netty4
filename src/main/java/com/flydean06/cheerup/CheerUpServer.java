@@ -34,29 +34,29 @@ public final class CheerUpServer {
     public static void main(String[] args) throws Exception {
 
         // Server配置
-        //boss loop
+        // boss loop
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        //worker loop
+        // worker loop
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         final CheerUpServerHandler serverHandler = new CheerUpServerHandler();
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-              // tcp/ip协议listen函数中的backlog参数,等待连接池的大小
-             .option(ChannelOption.SO_BACKLOG, 100)
-              //日志处理器
-             .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new ChannelInitializer<SocketChannel>() {
-                 @Override
-                 //初始化channel，添加handler
-                 public void initChannel(SocketChannel ch) throws Exception {
-                     ChannelPipeline p = ch.pipeline();
-                     //日志处理器
-                     p.addLast(new LoggingHandler(LogLevel.INFO));
-                     p.addLast(serverHandler);
-                 }
-             });
+                    .channel(NioServerSocketChannel.class)
+                    // tcp/ip协议listen函数中的backlog参数,等待连接池的大小
+                    .option(ChannelOption.SO_BACKLOG, 100)
+                    // 日志处理器
+                    .handler(new LoggingHandler(LogLevel.INFO))
+                    .childHandler(new ChannelInitializer<SocketChannel>() {
+                        @Override
+                        // 初始化channel，添加handler
+                        public void initChannel(SocketChannel ch) throws Exception {
+                            ChannelPipeline p = ch.pipeline();
+                            //日志处理器
+                            p.addLast(new LoggingHandler(LogLevel.INFO));
+                            p.addLast(serverHandler);
+                        }
+                    });
 
             // 启动服务器
             ChannelFuture f = b.bind(PORT).sync();
@@ -64,7 +64,7 @@ public final class CheerUpServer {
             // 等待channel关闭
             f.channel().closeFuture().sync();
         } finally {
-            // 关闭所有的event loop
+            // 关闭所有的 event loop
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
